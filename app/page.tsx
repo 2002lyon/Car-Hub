@@ -5,8 +5,9 @@ import { fuels, yearsOfProduction } from "@/constants";
 import { HomeProps } from "@/types";
 
 export default async function Home({ searchParams }: HomeProps) {
+  console.log("earchparams",searchParams)
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer,
+    manufacturer: searchParams.manufacturer || "",
     year: searchParams.year || 2023,
     fuel: searchParams.fuel || "",
     limit: searchParams.limit || 10,
@@ -14,6 +15,7 @@ export default async function Home({ searchParams }: HomeProps) {
   });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+  console.log("dataempty",isDataEmpty,allCars);
 
   return (
     <main className="overflow-hidden">
@@ -36,13 +38,14 @@ export default async function Home({ searchParams }: HomeProps) {
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
+              abc
               {allCars?.map((car) => (
                 <CarCard car={car} />
               ))}
             </div>
           </section>
         ) : (
-          <div className="home__error-container">
+          <div className="home__error-container">asd
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
             <p>{allCars?.message}</p>
           </div>
