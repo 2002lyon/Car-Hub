@@ -7,13 +7,12 @@ export async function fetchCars(filters: FilterProps) {
   };
 
   const { manufacturer, year, model, limit, fuel } = filters;
-  // console.log("filters",filters);
+  console.log("filters",filters);
 
   const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel=${fuel}`,
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
     { headers: headers }
   );
-console.log("url0",`https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel=${fuel}`)
   const result = await response.json();
   // console.log("result",result)
   return result;
