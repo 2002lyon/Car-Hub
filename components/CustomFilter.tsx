@@ -6,15 +6,21 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
 
-const CustomFilter = ({ title, options }: CustomFilterProps) => {
+// const CustomFilter = ({ title, options }: CustomFilterProps) => {
+const CustomFilter = ({ title, options, setFilter }: CustomFilterProps) => {
   const [selected, setSelected] = useState(options[0]);
-  const router = useRouter();
+
+  // don't need router in client side rendering
+  // const router = useRouter();
 
   // update the URL search parameters and navigate to the new URL
-  const handleUpdateParams = (e: { title: string; value: string }) => {
-    const newPathName = updateSearchParams(title, e.value.toLowerCase());
-    router.push(newPathName);
-  };
+
+  // not needed in client side rendering;
+
+  // const handleUpdateParams = (e: { title: string; value: string }) => {
+  //   const newPathName = updateSearchParams(title, e.value.toLowerCase());
+  //   router.push(newPathName);
+  // };
 
   return (
     <div className="w-fit">
@@ -22,7 +28,11 @@ const CustomFilter = ({ title, options }: CustomFilterProps) => {
         value={selected}
         onChange={(e) => {
           setSelected(e); // Update the selected option in state
-          handleUpdateParams(e); // Update the URL search parameters and navigate to the new URL
+          // handleUpdateParams(e); // Update the URL search parameters and navigate to the new URL
+
+          // for client side instead of handleUpdate params we use setFilter
+
+          setFilter(e.value);
         }}
       >
         <div className="relative w-fit z-10">

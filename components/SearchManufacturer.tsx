@@ -5,10 +5,11 @@ import { SearchManufacturerProps } from "@/types";
 import { useState, Fragment } from "react";
 import { manufacturers } from "@/constants";
 
-const SearchManufacturer = ({
-  manufacturer,
-  setManufacturer,
-}: SearchManufacturerProps) => {
+// const SearchManufacturer = ({
+//   manufacturer,
+//   setManufacturer,
+// }: SearchManufacturerProps) => {
+const SearchManufacturer = ({ selected, setSelected }) => {
   const [query, setQuery] = useState("");
 
   const filteredManufactureres =
@@ -23,10 +24,8 @@ const SearchManufacturer = ({
 
   return (
     <div className="search-manufacturer">
-      <Combobox
-        value={manufacturer}
-          onChange = {setManufacturer}
-      >
+      {/* <Combobox value={manufacturer} onChange={setManufacturer}> */}
+      <Combobox value={selected} onChange={setSelected}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
@@ -65,15 +64,22 @@ const SearchManufacturer = ({
                 >
                   {({ selected, active }) => (
                     <>
-                       <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {item}
-                        </span>
+                      <span
+                        className={`block truncate ${
+                          selected ? "font-medium" : "font-normal"
+                        }`}
+                      >
+                        {item}
+                      </span>
 
-                        {/* Show an active blue background color if the option is selected */}
-                        {selected ? (
-                          <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active? "text-white": "text-pribg-primary-purple"}`}
-                          ></span>
-                        ) : null}
+                      {/* Show an active blue background color if the option is selected */}
+                      {selected ? (
+                        <span
+                          className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                            active ? "text-white" : "text-pribg-primary-purple"
+                          }`}
+                        ></span>
+                      ) : null}
                     </>
                   )}
                 </Combobox.Option>
